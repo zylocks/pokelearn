@@ -1,0 +1,107 @@
+from sys import exit
+
+#Choosing a pokemon
+def poke_choose():
+    print "Welome to PokeTown, chooooose your Pokemon"
+    print "We got a couple choices for ya"
+    print "1. WaterShootShoot"
+    print "2. FlameFace"
+    print "3. TentacleTouch"
+
+    choice1 = raw_input("> ")
+
+    if choice1 in ("1", "WaterShootShoot"):
+        print "Great watery googly"
+    elif choice1 in ("2", "FlameFace"):
+        print "FIRE FROM ABOVE"
+    elif choice1 in ("3", "TentacleTouch"):
+        print "Whatya gonna do with that tentacle ;)?"
+    elif choice1 == "ZapPika":
+        print "You found the secret..! *Zap zap*"
+    else:
+        print "\nThank you, come again (TRY AGAIN YO)\n"
+        poke_choose()
+
+    print "Good luck on your journey"
+
+    print "if you ever want to quit, type quit!"
+
+    start_spot = "1"
+    return start_spot
+
+#making sure the user enters in a valid direction/quit option
+def direction_check(choice, check1):
+    print choice
+
+    direction_answer = raw_input("> ")
+
+    if direction_answer == "quit":
+        print "Lata!"
+        exit(0)
+
+    if direction_answer in choice:
+        print "OK"
+        check1 == True
+        return check1
+    else:
+        print "please try again"
+
+#How to move character around the map
+def direction(location, health):
+    while health > 0:
+        print "which direction would you like to go?"
+        print "Direction choice(s): "
+
+        north = "North"
+        south = "South"
+        west = "West"
+        east = "East"
+
+        choice = []
+        check1 = False
+
+        if location == "1":
+            choice.append(north)
+
+            while check1 == False:
+                direction_check(choice, check1)
+                print "Hello"
+            location = "3"
+        elif location == "8":
+            choice.append(south)
+            direction_check(choice)
+        elif location == "2":
+            choice.extend([north, east])
+            direction_check(choice)
+        elif location == "4":
+            choice.extend([north, west])
+            direction_check(choice)
+        elif location == "5":
+            choice.extend([south, east])
+            direction_check(choice)
+        elif location == "7":
+            choice.extend([south, west])
+            direction_check(choice)
+        else:
+            choice.extend([north, south, east, west])
+            direction_check(choice)
+
+#Eventual Pokemon Health
+def poke_health(health, damage):
+    health =- damage
+    return health
+
+    if health <= 0:
+        print "Oh no, you dead..!"
+        print "Would you like to play again? Yes/No"
+
+        game_over = raw_input("> ")
+
+        if game_over == ("Yes" or "yes"):
+            poke_choose()
+        else:
+            exit(0)
+health = 1
+
+start_spot = poke_choose()
+location = direction(start_spot, health)
